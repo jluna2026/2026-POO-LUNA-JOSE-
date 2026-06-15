@@ -1,6 +1,6 @@
 # Gestión de Mascotas en Python
 
-**Autor:** Jose [Tu Apellido]
+**Autor:** Jose Luna
 
 Este proyecto presenta dos enfoques para resolver el mismo problema: registrar y mostrar información de mascotas.
 

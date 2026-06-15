@@ -1,5 +1,5 @@
 # mascota.py
-# Clase Mascota con atributos y métodos
+# Clase Mascota con atributos y métodos.
 
 class Mascota:
     def __init__(self, nombre, especie, edad):

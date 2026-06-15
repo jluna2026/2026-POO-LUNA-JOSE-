@@ -1,5 +1,5 @@
 # tradicional.py
-# Programa de gestión de mascotas con programación tradicional
+# Programa de gestión de mascotas con programación tradicionala
 
 def registrar_mascota():
     nombre = input("Ingrese el nombre de la mascota: ")
