@@ -1,0 +1,1 @@
+# Permite tratar la carpeta modelos como un paquete de Python.
