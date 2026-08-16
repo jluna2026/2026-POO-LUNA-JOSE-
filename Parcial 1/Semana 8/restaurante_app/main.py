@@ -12,10 +12,10 @@ def menu():
         print("***************************************")
         print("1. Registrar producto")
         print("2. Registrar bebida")
-        print("3. Registrar cliente")
+        print("3. Registrar Usuario")
         print("---------------------------------------")
         print("4. Listar productos")
-        print("5. Listar clientes")
+        print("5. Listar Usuarios")
         print("---------------------------------------")
         print("6. Salir")
 
