@@ -1,13 +1,12 @@
 import json
-import os
 
 from modelos.producto import Producto
 
 
 class ArchivoServicio:
 
-    def __init__(self, ruta_archivo):
-        self.ruta_archivo = ruta_archivo
+    def __init__(self):
+        self.ruta_archivo = "datos/productos.json"
 
     def cargar_productos(self):
 
@@ -21,30 +20,34 @@ class ArchivoServicio:
 
                 datos = json.load(archivo)
 
-                productos = []
+            productos = []
 
-                for item in datos:
+            for item in datos:
+                producto = Producto.desde_diccionario(
+                    item
+                )
+                productos.append(producto)
 
-                    productos.append(
-                        Producto.desde_diccionario(
-                            item
-                        )
-                    )
-
-                return productos
+            return productos
 
         except FileNotFoundError:
+
+            print("Archivo no encontrado.")
             return []
 
         except json.JSONDecodeError:
+
+            print("Error en el JSON.")
             return []
 
-    def guardar_productos(self, productos):
+    def guardar_productos(
+        self,
+        productos
+    ):
 
         datos = []
 
         for producto in productos:
-
             datos.append(
                 producto.a_diccionario()
             )
@@ -62,7 +65,6 @@ class ArchivoServicio:
                 ensure_ascii=False
             )
 
-        print("Productos guardados correctamente.")
-
-
-        
+        print(
+            "Productos guardados correctamente."
+        )

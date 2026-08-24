@@ -11,6 +11,11 @@ class Restaurante:
 
     def agregar_producto(self, codigo, nombre, precio):
 
+        if self.buscar_producto(codigo):
+            raise ValueError(
+                "Ya existe un producto con ese código."
+            )
+
         producto = Producto(
             codigo,
             nombre,
@@ -39,23 +44,21 @@ class Restaurante:
 
         producto = self.buscar_producto(codigo)
 
-        if producto:
+        if producto is None:
+            raise ValueError(
+                "Producto no encontrado."
+            )
 
-            producto.nombre = nombre
-            producto.precio = precio
-
-            return True
-
-        return False
+        producto.nombre = nombre
+        producto.precio = precio
 
     def eliminar_producto(self, codigo):
 
         producto = self.buscar_producto(codigo)
 
-        if producto:
+        if producto is None:
+            raise ValueError(
+                "Producto no encontrado."
+            )
 
-            self.productos.remove(producto)
-
-            return True
-
-        return False
+        self.productos.remove(producto)

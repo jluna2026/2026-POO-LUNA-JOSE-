@@ -7,7 +7,7 @@ class Usuario:
 
     def __str__(self):
         return (
-            f"{self.id_usuario} - "
-            f"{self.nombre} - "
-            f"{self.correo}"
+            f"ID: {self.id_usuario} | "
+            f"Nombre: {self.nombre} | "
+            f"Correo: {self.correo}"
         )

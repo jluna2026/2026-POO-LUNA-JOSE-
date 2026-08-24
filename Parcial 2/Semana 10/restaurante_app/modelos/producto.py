@@ -21,4 +21,8 @@ class Producto:
         )
 
     def __str__(self):
-        return f"{self.codigo} - {self.nombre} - ${self.precio}"
+        return (
+            f"Código: {self.codigo} | "
+            f"Nombre: {self.nombre} | "
+            f"Precio: ${self.precio:.2f}"
+        )
