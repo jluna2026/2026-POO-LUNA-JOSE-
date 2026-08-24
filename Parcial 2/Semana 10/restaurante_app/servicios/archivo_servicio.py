@@ -1,70 +1,35 @@
+import os
 import json
 
-from modelos.producto import Producto
+RUTA_ARCHIVO = os.path.join("datos", "productos.json")
 
 
-class ArchivoServicio:
+def guardar_productos(productos_dict_list: list) -> bool:
+    """Guarda la lista de diccionarios de productos en el archivo JSON."""
+    try:
+        # Asegura que la carpeta 'datos' exista
+        os.makedirs(os.path.dirname(RUTA_ARCHIVO), exist_ok=True)
 
-    def __init__(self):
-        self.ruta_archivo = "datos/productos.json"
+        with open(RUTA_ARCHIVO, "w", encoding="utf-8") as archivo:
+            json.dump(productos_dict_list, archivo, ensure_ascii=False, indent=4)
+        return True
+    except IOError as e:
+        print(f"\n[Error de Archivo] No se pudo escribir en el disco: {e}")
+        return False
 
-    def cargar_productos(self):
 
-        try:
+def cargar_productos() -> list:
+    """Lee el archivo JSON y retorna la lista de datos cargados."""
+    if not os.path.exists(RUTA_ARCHIVO):
+        # La ausencia inicial del archivo no debe impedir ejecutar el programa
+        return []
 
-            with open(
-                self.ruta_archivo,
-                "r",
-                encoding="utf-8"
-            ) as archivo:
-
-                datos = json.load(archivo)
-
-            productos = []
-
-            for item in datos:
-                producto = Producto.desde_diccionario(
-                    item
-                )
-                productos.append(producto)
-
-            return productos
-
-        except FileNotFoundError:
-
-            print("Archivo no encontrado.")
-            return []
-
-        except json.JSONDecodeError:
-
-            print("Error en el JSON.")
-            return []
-
-    def guardar_productos(
-        self,
-        productos
-    ):
-
-        datos = []
-
-        for producto in productos:
-            datos.append(
-                producto.a_diccionario()
-            )
-
-        with open(
-            self.ruta_archivo,
-            "w",
-            encoding="utf-8"
-        ) as archivo:
-
-            json.dump(
-                datos,
-                archivo,
-                indent=4,
-                ensure_ascii=False
-            )
-
-        print(
-            "Productos guardados correctamente."
-        )
+    try:
+        with open(RUTA_ARCHIVO, "r", encoding="utf-8") as archivo:
+            return json.load(archivo)
+    except json.JSONDecodeError:
+        print("\n[Error de Formato] El archivo 'productos.json' está corrupto o es inválido.")
+        return []
+    except IOError as e:
+        print(f"\n[Error de Archivo] No se pudo leer el archivo: {e}")
+        return []
