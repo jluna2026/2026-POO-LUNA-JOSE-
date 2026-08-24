@@ -1,0 +1,12 @@
+[
+    {
+        "codigo": "00",
+        "nombre": "HAMBURGUESA",
+        "precio": 3.0
+    },
+    {
+        "codigo": "01",
+        "nombre": "SALCHIPAPA",
+        "precio": 3.0
+    }
+]
