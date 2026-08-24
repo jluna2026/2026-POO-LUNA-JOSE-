@@ -200,6 +200,6 @@ python main.py
 
 ## Autor
 
-**José Eduardo Luna Ávila**
+**José Eduardo Luna Ávila uea**
 
 Proyecto académico desarrollado para la materia de Programación Orientada a Objetos.
