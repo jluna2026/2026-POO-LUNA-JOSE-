@@ -91,4 +91,29 @@ while True:
                 f"Cantidad: {venta.cantidad}"
             )
 
-    elif opcion ==
+    elif opcion == "4":
+
+        identificacion = input(
+            "Identificación usuario: "
+        )
+
+        ventas = restaurante.ventas_usuario(
+            identificacion
+        )
+
+        for venta in ventas:
+
+            print(
+                f"Producto: {venta.producto_codigo}"
+            )
+
+            print(
+                f"Cantidad: {venta.cantidad}"
+            )
+
+    elif opcion == "5":
+        print("Programa finalizado")
+        break
+
+    else:
+        print("Opción inválida")
