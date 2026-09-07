@@ -1,148 +1,79 @@
 from modelos.producto import Producto
 from modelos.usuario import Usuario
 from modelos.venta import Venta
-
 from servicios.archivo_servicio import ArchivoServicio
 
 
 class Restaurante:
-
     def __init__(self):
-
         self._productos = []
         self._usuarios = []
         self._ventas = []
-
+        self._productos_dict = {}
+        self._usuarios_dict = {}
         self.cargar_datos()
 
     def cargar_datos(self):
+        productos = ArchivoServicio.cargar("datos/productos.json")
+        usuarios = ArchivoServicio.cargar("datos/usuarios.json")
+        ventas = ArchivoServicio.cargar("datos/ventas.json")
 
-        productos = ArchivoServicio.cargar(
-            "datos/productos.json"
-        )
+        self._productos = [Producto(**p) for p in productos]
+        self._usuarios = [Usuario(**u) for u in usuarios]
+        self._ventas = [Venta(**v) for v in ventas]
 
-        usuarios = ArchivoServicio.cargar(
-            "datos/usuarios.json"
-        )
-
-        ventas = ArchivoServicio.cargar(
-            "datos/ventas.json"
-        )
-
-        self._productos = [
-            Producto(
-                p["codigo"],
-                p["nombre"],
-                p["precio"],
-                p["stock"]
-            )
-            for p in productos
-        ]
-
-        self._usuarios = [
-            Usuario(
-                u["identificacion"],
-                u["nombre"]
-            )
-            for u in usuarios
-        ]
-
-        self._ventas = [
-            Venta(
-                v["usuario_id"],
-                v["producto_codigo"],
-                v["cantidad"]
-            )
-            for v in ventas
-        ]
+        self._productos_dict = {p.codigo: p for p in self._productos}
+        self._usuarios_dict = {u.identificacion: u for u in self._usuarios}
 
     def guardar_productos(self):
-        ArchivoServicio.guardar(
-            "datos/productos.json",
-            [p.to_dict() for p in self._productos]
-        )
+        ArchivoServicio.guardar("datos/productos.json", [p.to_dict() for p in self._productos])
 
     def guardar_usuarios(self):
-        ArchivoServicio.guardar(
-            "datos/usuarios.json",
-            [u.to_dict() for u in self._usuarios]
-        )
+        ArchivoServicio.guardar("datos/usuarios.json", [u.to_dict() for u in self._usuarios])
 
     def guardar_ventas(self):
-        ArchivoServicio.guardar(
-            "datos/ventas.json",
-            [v.to_dict() for v in self._ventas]
-        )
+        ArchivoServicio.guardar("datos/ventas.json", [v.to_dict() for v in self._ventas])
 
-    def agregar_producto(self, producto):
+    def agregar_producto(self, producto: Producto):
+        if producto.codigo in self._productos_dict:
+            print("⚠️ Producto ya registrado")
+            return
         self._productos.append(producto)
+        self._productos_dict[producto.codigo] = producto
         self.guardar_productos()
 
-    def agregar_usuario(self, usuario):
+    def agregar_usuario(self, usuario: Usuario):
+        if usuario.identificacion in self._usuarios_dict:
+            print("⚠️ Usuario ya registrado")
+            return
         self._usuarios.append(usuario)
+        self._usuarios_dict[usuario.identificacion] = usuario
         self.guardar_usuarios()
 
-    def buscar_producto(self, codigo):
+    def buscar_producto(self, codigo: str):
+        return self._productos_dict.get(codigo)
 
-        for producto in self._productos:
-            if producto.codigo == codigo:
-                return producto
+    def buscar_usuario(self, identificacion: str):
+        return self._usuarios_dict.get(identificacion)
 
-        return None
+    def vender_producto(self, codigo_producto: str, identificacion_usuario: str, cantidad: int):
+        usuario = self.buscar_usuario(identificacion_usuario)
+        producto = self.buscar_producto(codigo_producto)
 
-    def buscar_usuario(self, identificacion):
-
-        for usuario in self._usuarios:
-            if usuario.identificacion == identificacion:
-                return usuario
-
-        return None
-
-    def vender_producto(
-        self,
-        codigo_producto,
-        identificacion_usuario,
-        cantidad
-    ):
-
-        usuario = self.buscar_usuario(
-            identificacion_usuario
-        )
-
-        producto = self.buscar_producto(
-            codigo_producto
-        )
-
-        if usuario is None or producto is None:
+        if usuario is None or producto is None or cantidad <= 0 or producto.stock < cantidad:
             return False
 
-        if cantidad <= 0:
-            return False
-
-        if producto.stock < cantidad:
-            return False
-
-        venta = Venta(
-            usuario.identificacion,
-            producto.codigo,
-            cantidad
-        )
-
+        venta = Venta(usuario.identificacion, producto.codigo, cantidad)
         self._ventas.append(venta)
-
         producto.vender(cantidad)
 
         self.guardar_ventas()
         self.guardar_productos()
-
         return True
 
-    def ventas_usuario(self, identificacion):
+    def ventas_usuario(self, identificacion: str):
+        return [v for v in self._ventas if v.usuario_id == identificacion]
 
-        resultado = []
-
-        for venta in self._ventas:
-            if venta.usuario_id == identificacion:
-                resultado.append(venta)
-
-        return resultado
+    def productos_ordenados_por_stock(self):
+        # Devuelve productos ordenados de mayor a menor stock
+        return sorted(self._productos, key=lambda p: p.stock, reverse=True)
