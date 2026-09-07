@@ -3,6 +3,12 @@
         "codigo": "001",
         "nombre": "Hamburguesa",
         "precio": 3.0,
-        "stock": 8
+        "stock": 7
+    },
+    {
+        "codigo": "A001",
+        "nombre": "LAPTOP",
+        "precio": 850.0,
+        "stock": 9
     }
 ]

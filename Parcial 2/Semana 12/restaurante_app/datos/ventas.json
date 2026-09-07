@@ -1,7 +1,20 @@
 [
     {
+        "usuario_id": "0802569615",
+        "producto_codigo": "001",
+        "cantidad": 2,
+        "fecha": "2026-09-06 22:37:22"
+    },
+    {
         "usuario_id": "0802569616",
         "producto_codigo": "001",
-        "cantidad": 2
+        "cantidad": 1,
+        "fecha": "2026-09-06 22:39:10"
+    },
+    {
+        "usuario_id": "0802569617",
+        "producto_codigo": "A001",
+        "cantidad": 1,
+        "fecha": "2026-09-06 22:39:53"
     }
 ]
