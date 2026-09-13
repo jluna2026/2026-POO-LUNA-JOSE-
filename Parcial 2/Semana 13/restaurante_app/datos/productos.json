@@ -1,0 +1,17 @@
+[
+    {
+        "id": 1,
+        "nombre": "Hamburguesa",
+        "cantidad": 25
+    },
+    {
+        "id": 2,
+        "nombre": "Pizza",
+        "cantidad": 15
+    },
+    {
+        "id": 3,
+        "nombre": "Gaseosa",
+        "cantidad": 40
+    }
+]
