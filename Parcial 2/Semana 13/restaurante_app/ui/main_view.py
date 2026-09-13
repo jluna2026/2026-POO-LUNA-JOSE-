@@ -1,60 +1,59 @@
-import *kinter as tk
+import tkinter as tk
 
-class MainView(tk.Fr*me):
+class MainView(tk.Frame):
 
-    def __init__(self, maste*, servicio, callback_logout):
-    *   super().__init__(master)
+    def __init__(self, master, servicio, callback_logout):
+        super().__init__(master)
 
-     *  self.servicio = servicio
-       *self.callback_logout = callback_lo*out
+        self.servicio = servicio
+        self.callback_logout = callback_logout
 
         tk.Label(
-           *self,
-            text="RESTAURANT* APP",
-            font=("Arial", *6, "bold")
-        ).pack(pady=10)*
-        tk.Button(
-            se*f,
-            text="Mostrar Produ*tos",
-            command=self.mos*rar_productos
-        ).pack(pady=*)
+            self,
+            text="RESTAURANTE APP",
+            font=("Arial", 16, "bold")
+        ).pack(pady=10)
 
         tk.Button(
-            *elf,
-            text="Mostrar Usu*rios",
-            command=self.mo*trar_usuarios
-        ).pack(pady=*)
-
-        tk.Button(
-            *elf,
-            text="Ventas (Pen*iente)"
+            self,
+            text="Mostrar Productos",
+            command=self.mostrar_productos
         ).pack(pady=5)
 
-  *     tk.Button(
+        tk.Button(
             self,
-*           text="Cerrar sesión",
- *          command=self.callback_lo*out
-        ).pack(pady=20)
+            text="Mostrar Usuarios",
+            command=self.mostrar_usuarios
+        ).pack(pady=5)
 
-     *  self.area_texto = tk.Text(self, *idth=50, height=10)
-        self.a*ea_texto.pack()
+        tk.Button(
+            self,
+            text="Ventas (Pendiente)"
+        ).pack(pady=5)
 
-    def mostrar_p*oductos(self):
+        tk.Button(
+            self,
+            text="Cerrar sesión",
+            command=self.callback_logout
+        ).pack(pady=10)
 
-        self.area_*exto.delete("1.0", tk.END)
+        self.area_texto = tk.Text(self, width=50, height=10)
+        self.area_texto.pack(pady=10)
 
-      * for producto in self.servicio.lis*ar_productos():
-            self.a*ea_texto.insert(
-                t*.END,
-                f"{producto.*ombre} - Cantidad: {producto.canti*ad}\n"
+    def mostrar_productos(self):
+        self.area_texto.delete("1.0", tk.END)
+
+        for producto in self.servicio.listar_productos():
+            self.area_texto.insert(
+                tk.END,
+                f"{producto.nombre} - Cantidad: {producto.cantidad}\n"
             )
 
-    def most*ar_usuarios(self):
+    def mostrar_usuarios(self):
+        self.area_texto.delete("1.0", tk.END)
 
-        self.a*ea_texto.delete("1.0", tk.END)
-
-  *     for usuario in self.servicio.*istar_usuarios():
-            self*area_texto.insert(
+        for usuario in self.servicio.listar_usuarios():
+            self.area_texto.insert(
                 tk.END,
                 f"{usuario.usuario}\n"
             )

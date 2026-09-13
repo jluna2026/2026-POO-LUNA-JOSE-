@@ -13,8 +13,9 @@ class Aplicacion:
 
         self.root = root
         self.root.title("Restaurante App")
-        self.root.geometry("500x450")
+        self.root.geometry("600x450")
 
+        # Cargar datos JSON
         archivo_servicio = ArchivoServicio()
 
         productos = archivo_servicio.leer_json(
@@ -25,6 +26,7 @@ class Aplicacion:
             "datos/usuarios.json"
         )
 
+        # Crear servicio principal
         self.restaurante_servicio = RestauranteServicio(
             productos,
             usuarios
@@ -33,7 +35,9 @@ class Aplicacion:
         self.mostrar_login()
 
     def limpiar_ventana(self):
-
+        """
+        Elimina todos los widgets de la ventana principal
+        """
         for widget in self.root.winfo_children():
             widget.destroy()
 
@@ -41,25 +45,25 @@ class Aplicacion:
 
         self.limpiar_ventana()
 
-        vista = LoginView(
+        vista_login = LoginView(
             self.root,
             self.restaurante_servicio,
             self.mostrar_principal
         )
 
-        vista.pack(fill="both", expand=True)
+        vista_login.pack(fill="both", expand=True)
 
     def mostrar_principal(self):
 
         self.limpiar_ventana()
 
-        vista = MainView(
+        vista_principal = MainView(
             self.root,
-            self.restaurante_servio,
+            self.restaurante_servicio,
             self.mostrar_login
         )
 
-        vista.pack(fill="both", expand=True)
+        vista_principal.pack(fill="both", expand=True)
 
 
 if __name__ == "__main__":

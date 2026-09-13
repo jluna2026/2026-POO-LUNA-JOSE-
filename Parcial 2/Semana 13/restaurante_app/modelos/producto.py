@@ -3,4 +3,3 @@ class Producto:
         self.id = id
         self.nombre = nombre
         self.cantidad = cantidad
-``
