@@ -1,10 +1,12 @@
 [
     {
-        "usuario": "admin",
+        "identificacion": "123",
+        "nombre": "Jose",
         "password": "1234"
     },
     {
-        "usuario": "cajero",
-        "password": "5678"
+        "identificacion": "456",
+        "nombre": "Maria",
+        "password": "abcd"
     }
 ]
