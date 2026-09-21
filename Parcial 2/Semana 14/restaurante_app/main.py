@@ -28,13 +28,13 @@ class Aplicacion:
 
     def mostrar_login(self):
         self.limpiar_ventana()
-        # LoginView recibe root y servicio
+        # LoginView recibe root, servicio y callback
         vista_login = LoginView(self.root, self.restaurante_servicio, self.mostrar_principal)
         vista_login.pack(fill="both", expand=True)
 
     def mostrar_principal(self):
         self.limpiar_ventana()
-        # MainView recibe root y servicio
+        # MainView recibe root, servicio y callback
         vista_principal = MainView(self.root, self.restaurante_servicio, self.mostrar_login)
         vista_principal.pack(fill="both", expand=True)
 

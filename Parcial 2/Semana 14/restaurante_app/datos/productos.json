@@ -1,17 +1,20 @@
 [
     {
-        "id": 1,
-        "nombre": "Hamburguesa",
-        "cantidad": 25
-    },
-    {
-        "id": 2,
+        "codigo": "P002",
         "nombre": "Pizza",
-        "cantidad": 15
+        "precio": 5.0,
+        "stock": 15
     },
     {
-        "id": 3,
-        "nombre": "Gaseosa",
-        "cantidad": 40
+        "codigo": "P003",
+        "nombre": "Refresco",
+        "precio": 1.5,
+        "stock": 50
+    },
+    {
+        "codigo": "P004",
+        "nombre": "JUGUETE",
+        "precio": 3.6,
+        "stock": 100
     }
 ]

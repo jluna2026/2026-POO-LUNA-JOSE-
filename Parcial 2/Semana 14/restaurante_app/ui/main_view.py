@@ -1,12 +1,11 @@
 import tkinter as tk
 from tkinter import ttk, messagebox
 
-class MainView(tk.Tk):
-    def __init__(self, servicio):
-        super().__init__()
+class MainView(tk.Frame):
+    def __init__(self, root, servicio, callback_logout):
+        super().__init__(root)
         self.servicio = servicio
-        self.title("Restaurante App - Semana 14")
-        self.geometry("800x600")
+        self.callback_logout = callback_logout
 
         # Contenedor principal con pestañas
         contenedor = ttk.Notebook(self)
@@ -21,6 +20,9 @@ class MainView(tk.Tk):
         frame_productos = ttk.Frame(contenedor)
         contenedor.add(frame_productos, text="Productos")
         self._crear_seccion_productos(frame_productos)
+
+        # Botón de cerrar sesión
+        ttk.Button(self, text="Cerrar sesión", command=self.callback_logout).pack(pady=10)
 
     # ---------------- USUARIOS ----------------
     def _crear_seccion_usuarios(self, frame):
@@ -126,7 +128,3 @@ class MainView(tk.Tk):
         # Insertar productos actualizados
         for p in self.servicio.listar_productos():
             self.tabla_productos.insert("", "end", values=(p.codigo, p.nombre, p.precio, p.stock))
-def mostrar_principal(self):
-    self.limpiar_ventana()
-    vista_principal = MainView(self.restaurante_servicio)  # solo servicio
-    vista_principal.pack(fill="both", expand=True)

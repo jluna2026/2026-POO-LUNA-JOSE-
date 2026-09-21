@@ -22,8 +22,8 @@ class LoginView(tk.Frame):
     def _login(self):
         ident = self.ident_entry.get()
         password = self.pass_entry.get()
-        if self.servicio.validar_usuario(ident, password):
+        if not self.servicio.validar_usuario(ident, password):
+            messagebox.showerror("Error", "Credenciales inválidas")
+        else:
             # Si las credenciales son correctas, llamamos al callback
             self.callback_principal()
-        else:
-            messagebox.showerror("Error", "Credenciales inválidas")

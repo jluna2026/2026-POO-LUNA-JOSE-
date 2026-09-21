@@ -13,21 +13,24 @@ class RestauranteServicio:
         self._productos = productos if productos is not None else ArchivoServicio.cargar(self.productos_file)
         self._usuarios = usuarios if usuarios is not None else ArchivoServicio.cargar(self.usuarios_file)
 
+        # Aquí sí puedes imprimir, porque ya existe self
+        print("Usuarios cargados:", self._usuarios)
+
     # ---------------- USUARIOS ----------------
     def listar_usuarios(self):
         return [Usuario(u["identificacion"], u["nombre"], u["password"]) for u in self._usuarios]
 
     def validar_usuario(self, identificacion, password):
         for u in self._usuarios:
-            if u["identificacion"] == identificacion and u["password"] == password:
+            if str(u["identificacion"]) == str(identificacion) and str(u["password"]) == str(password):
                 return True
         return False
+
     # ---------------- PRODUCTOS ----------------
     def listar_productos(self):
         return [Producto(p["codigo"], p["nombre"], p["precio"], p["stock"]) for p in self._productos]
 
     def registrar_producto(self, codigo, nombre, precio, stock):
-        # Validaciones de negocio
         if any(p["codigo"] == codigo for p in self._productos):
             raise ValueError("El producto ya existe.")
         if precio <= 0:

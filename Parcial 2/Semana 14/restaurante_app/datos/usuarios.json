@@ -8,5 +8,10 @@
         "identificacion": "456",
         "nombre": "Maria",
         "password": "abcd"
+    },
+    {
+        "identificacion": "789",
+        "nombre": "Carlos",
+        "password": "pass789"
     }
 ]
