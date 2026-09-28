@@ -1,0 +1,34 @@
+[
+    {
+        "codigo": "P01",
+        "nombre": "Encebollado",
+        "precio": 2.5,
+        "categoria": "DESAYUNO",
+        "descripcion": "Plato tradicional con albacora Esmeraldeña",
+        "stock": 800
+    },
+    {
+        "codigo": "P02",
+        "nombre": "Seco de Gallina",
+        "precio": 5,
+        "categoria": "ALMUERZO",
+        "descripcion": "Incluye arroz y ensalada",
+        "stock": 900
+    },
+    {
+        "codigo": "P03",
+        "nombre": "Caldo de gallina",
+        "precio": 5.0,
+        "categoria": "ALMUERZO",
+        "descripcion": "Caldo casero con gallina criolla, arroz y aguacate",
+        "stock": 5
+    },
+    {
+        "codigo": "P04",
+        "nombre": "Cafe",
+        "precio": 1.0,
+        "categoria": "BEBIDA",
+        "descripcion": "cafe sin azucar ",
+        "stock": 200
+    }
+]

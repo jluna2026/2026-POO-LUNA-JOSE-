@@ -1,0 +1,16 @@
+[
+    {
+        "identificacion": "0802569616",
+        "nombre": "José Luna",
+        "telefono": "0979480084",
+        "usuario": "jluna",
+        "contrasena": "luna123"
+    },
+    {
+        "identificacion": "080000000000",
+        "nombre": "Administrador",
+        "telefono": "0980000000",
+        "usuario": "admin",
+        "contrasena": "admin"
+    }
+]
