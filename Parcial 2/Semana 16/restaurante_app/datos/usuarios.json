@@ -1,0 +1,26 @@
+[
+    {
+        "identificacion": "080000000000",
+        "nombre": "Administrador",
+        "telefono": "0980000000",
+        "usuario": "admin",
+        "contrasena": "admin",
+        "rol": "Administrador"
+    },
+    {
+        "identificacion": "0802569616",
+        "nombre": "Jose Luna",
+        "telefono": "0979480084",
+        "usuario": "jluna",
+        "contrasena": "luna123",
+        "rol": "Empleado"
+    },
+    {
+        "identificacion": "0801234567",
+        "nombre": "Cliente Prueba",
+        "telefono": "0991234567",
+        "usuario": "cliente",
+        "contrasena": "cliente123",
+        "rol": "Cliente"
+    }
+]
