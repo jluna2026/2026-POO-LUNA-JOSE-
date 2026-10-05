@@ -28,6 +28,7 @@ class RestauranteServicio:
                     datos.get("telefono", ""),
                     datos.get("usuario", ""),
                     datos.get("contrasena", ""),
+                    datos.get("rol", "Cliente")
                 )
                 self.usuarios.append(usuario)
             except ValueError as error:

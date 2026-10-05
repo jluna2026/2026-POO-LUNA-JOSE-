@@ -1,47 +1,43 @@
-class Producto:
+class Usuario:
 
-    CATEGORIAS_VALIDAS: tuple[str, ...] = (
-        "DESAYUNO",
-        "ALMUERZO",
-        "CENA",
-        "BEBIDA",
-        "ADICIONAL",
+    LONGITUD_MINIMA_CONTRASENA = 4
+
+    ROLES_VALIDOS = (
+        "Administrador",
+        "Empleado",
+        "Cliente"
     )
 
     def __init__(
         self,
-        codigo: str,
+        identificacion: str,
         nombre: str,
-        precio: float,
-        categoria: str,
-        descripcion: str = "",
-        stock: int = 0,
+        telefono: str,
+        usuario: str,
+        contrasena: str,
+        rol: str = "Cliente"
     ) -> None:
 
-        self.codigo = codigo
+        self.identificacion = identificacion
         self.nombre = nombre
-        self.precio = precio
-        self.categoria = categoria
-        self.descripcion = descripcion
-        self.stock = stock
-
-    @staticmethod
-    def formatear_codigo(valor: str) -> str:
-        return valor.strip().upper()
+        self.telefono = telefono
+        self.usuario = usuario
+        self.contrasena = contrasena
+        self.rol = rol
 
     @property
-    def codigo(self) -> str:
-        return self._codigo
+    def identificacion(self) -> str:
+        return self._identificacion
 
-    @codigo.setter
-    def codigo(self, valor: str) -> None:
+    @identificacion.setter
+    def identificacion(self, valor: str) -> None:
 
         if not valor or not valor.strip():
             raise ValueError(
-                "El codigo no puede estar vacio."
+                "La identificacion no puede estar vacia."
             )
 
-        self._codigo = Producto.formatear_codigo(valor)
+        self._identificacion = valor.strip()
 
     @property
     def nombre(self) -> str:
@@ -52,124 +48,126 @@ class Producto:
 
         if not valor or not valor.strip():
             raise ValueError(
-                "El nombre del producto no puede estar vacio."
+                "El nombre no puede estar vacio."
             )
 
         self._nombre = valor.strip()
 
     @property
-    def precio(self) -> float:
-        return self._precio
+    def telefono(self) -> str:
+        return self._telefono
 
-    @precio.setter
-    def precio(self, valor: float) -> None:
-
-        try:
-            precio = float(valor)
-
-        except (TypeError, ValueError):
-            raise ValueError(
-                "El precio debe ser un numero valido."
-            )
-
-        if precio < 0:
-            raise ValueError(
-                "El precio no puede ser negativo."
-            )
-
-        self._precio = round(precio, 2)
-
-    @property
-    def categoria(self) -> str:
-        return self._categoria
-
-    @categoria.setter
-    def categoria(self, valor: str) -> None:
+    @telefono.setter
+    def telefono(self, valor: str) -> None:
 
         if not valor or not valor.strip():
             raise ValueError(
-                "La categoria no puede estar vacia."
+                "El telefono no puede estar vacio."
             )
 
-        categoria = valor.strip().upper()
-
-        if categoria not in self.CATEGORIAS_VALIDAS:
+        if not valor.strip().isdigit():
             raise ValueError(
-                f"Categoria invalida. Use: "
-                f"{', '.join(self.CATEGORIAS_VALIDAS)}"
+                "El telefono debe contener solo digitos."
             )
 
-        self._categoria = categoria
+        self._telefono = valor.strip()
 
     @property
-    def descripcion(self) -> str:
-        return self._descripcion
+    def usuario(self) -> str:
+        return self._usuario
 
-    @descripcion.setter
-    def descripcion(self, valor: str) -> None:
+    @usuario.setter
+    def usuario(self, valor: str) -> None:
 
-        self._descripcion = (
-            valor.strip()
-            if valor
-            else ""
+        if not valor or not valor.strip():
+            raise ValueError(
+                "El nombre de usuario no puede estar vacio."
+            )
+
+        self._usuario = valor.strip().lower()
+
+    @property
+    def contrasena(self) -> str:
+        return self._contrasena
+
+    @contrasena.setter
+    def contrasena(self, valor: str) -> None:
+
+        if not valor or not valor.strip():
+            raise ValueError(
+                "La contrasena no puede estar vacia."
+            )
+
+        valor_limpio = valor.strip()
+
+        if len(valor_limpio) < self.LONGITUD_MINIMA_CONTRASENA:
+            raise ValueError(
+                f"La contrasena debe tener al menos "
+                f"{self.LONGITUD_MINIMA_CONTRASENA} caracteres."
+            )
+
+        if " " in valor_limpio:
+            raise ValueError(
+                "La contrasena no puede contener espacios."
+            )
+
+        self._contrasena = valor_limpio
+
+    @property
+    def rol(self) -> str:
+        return self._rol
+
+    @rol.setter
+    def rol(self, valor: str) -> None:
+
+        if not valor or not valor.strip():
+            raise ValueError(
+                "Debe seleccionar un rol."
+            )
+
+        rol = valor.strip()
+
+        if rol not in self.ROLES_VALIDOS:
+            raise ValueError(
+                f"Rol invalido. "
+                f"Roles permitidos: "
+                f"{', '.join(self.ROLES_VALIDOS)}"
+            )
+
+        self._rol = rol
+
+    def validar_credenciales(
+        self,
+        usuario: str,
+        contrasena: str
+    ) -> bool:
+
+        return (
+            self.usuario == usuario.strip().lower()
+            and
+            self.contrasena == contrasena.strip()
         )
 
-    @property
-    def stock(self) -> int:
-        return self._stock
+    def es_administrador(self) -> bool:
 
-    @stock.setter
-    def stock(self, valor: int) -> None:
-
-        try:
-            stock = int(valor)
-
-        except (TypeError, ValueError):
-            raise ValueError(
-                "El stock debe ser un numero entero."
-            )
-
-        if stock < 0:
-            raise ValueError(
-                "El stock no puede ser negativo."
-            )
-
-        self._stock = stock
-
-    def vender(self, cantidad: int) -> bool:
-
-        if cantidad <= 0:
-            return False
-
-        if self.stock < cantidad:
-            return False
-
-        self._stock -= cantidad
-
-        return True
-
-    def hay_disponibilidad(self) -> bool:
-
-        return self.stock > 0
+        return self.rol == "Administrador"
 
     def convertir_a_diccionario(self) -> dict:
 
         return {
-            "codigo": self.codigo,
+            "identificacion": self.identificacion,
             "nombre": self.nombre,
-            "precio": self.precio,
-            "categoria": self.categoria,
-            "descripcion": self.descripcion,
-            "stock": self.stock,
+            "telefono": self.telefono,
+            "usuario": self.usuario,
+            "contrasena": self.contrasena,
+            "rol": self.rol
         }
 
     def __str__(self) -> str:
 
         return (
-            f"Codigo: {self.codigo} | "
+            f"Identificacion: {self.identificacion} | "
             f"Nombre: {self.nombre} | "
-            f"Precio: ${self.precio:.2f} | "
-            f"Categoria: {self.categoria} | "
-            f"Descripcion: {self.descripcion or 'Sin descripcion'} | "
-            f"Stock: {self.stock}"
+            f"Telefono: {self.telefono} | "
+            f"Rol: {self.rol}"
         )

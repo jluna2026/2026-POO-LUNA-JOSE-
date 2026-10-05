@@ -1,9 +1,9 @@
 from .producto import Producto
 from .usuario import Usuario
 from .venta import Venta
- 
+
 __all__ = [
-"Producto",
-"Usuario",
-"Venta"
+    "Producto",
+    "Usuario",
+    "Venta"
 ]

@@ -5,12 +5,12 @@
         "precio": 2.5,
         "categoria": "DESAYUNO",
         "descripcion": "Plato tradicional con albacora Esmeraldeña",
-        "stock": 800
+        "stock": 100
     },
     {
         "codigo": "P02",
         "nombre": "Seco de Gallina",
-        "precio": 5,
+        "precio": 5.0,
         "categoria": "ALMUERZO",
         "descripcion": "Incluye arroz y ensalada",
         "stock": 900
@@ -28,7 +28,15 @@
         "nombre": "Cafe",
         "precio": 1.0,
         "categoria": "BEBIDA",
-        "descripcion": "cafe sin azucar ",
+        "descripcion": "cafe sin azucar",
         "stock": 200
+    },
+    {
+        "codigo": "P05",
+        "nombre": "Caldo de Pata",
+        "precio": 5.0,
+        "categoria": "ALMUERZO",
+        "descripcion": "pata con caldo con sal",
+        "stock": 10
     }
 ]
